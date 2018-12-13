@@ -18,7 +18,8 @@ class Shrine
         if copyable?(io)
           bucket.copy_object(io.storage.object_key(io.id), object_key(id))
         else
-          bucket.put_object(object_key(id), content_type: content_type) { |stream| stream << io.read }
+          # bucket.put_object(object_key(id), content_type: content_type) { |stream| stream << io.read }
+          bucket.put_object(object_key(id)) { |stream| stream << io.read }
         end
       end
 
